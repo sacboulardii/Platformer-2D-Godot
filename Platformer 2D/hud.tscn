@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0qfw7fj7ns0h"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_k8oax"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_k8oax")
+
+[node name="CurrentLevel" type="Label" parent="."]
+offset_right = 110.0
+offset_bottom = 26.0
+theme_override_font_sizes/font_size = 16
+text = "CurrentLevel"
+
+[node name="GemsLabel" type="Label" parent="."]
+offset_top = 26.0
+offset_right = 110.0
+offset_bottom = 52.0
+theme_override_font_sizes/font_size = 16
+text = "Gems: 0"

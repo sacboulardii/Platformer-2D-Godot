@@ -1,0 +1,86 @@
+[gd_scene load_steps=11 format=3 uid="uid://bbyq38dh7j4aj"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_q26fs"]
+[ext_resource type="Texture2D" uid="uid://dgubm4rsfulka" path="res://assets/tilemap/monochrome_tilemap_transparent.png" id="2_0tbu1"]
+[ext_resource type="AudioStream" uid="uid://dd5k62fjq8ums" path="res://jump.wav" id="3_x6lc8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_po734"]
+atlas = ExtResource("2_0tbu1")
+region = Rect2(0, 204, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4456"]
+atlas = ExtResource("2_0tbu1")
+region = Rect2(68, 204, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5ktp"]
+atlas = ExtResource("2_0tbu1")
+region = Rect2(17, 204, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ttjo"]
+atlas = ExtResource("2_0tbu1")
+region = Rect2(34, 204, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_05cuf"]
+atlas = ExtResource("2_0tbu1")
+region = Rect2(51, 204, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hy4ss"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_po734")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4456")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5ktp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ttjo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_05cuf")
+}],
+"loop": true,
+"name": &"run",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m6iw3"]
+radius = 3.0
+height = 8.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_q26fs")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 1)
+sprite_frames = SubResource("SpriteFrames_hy4ss")
+animation = &"run"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("CapsuleShape2D_m6iw3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 2)
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="JumpSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_x6lc8")
+volume_db = -10.0
